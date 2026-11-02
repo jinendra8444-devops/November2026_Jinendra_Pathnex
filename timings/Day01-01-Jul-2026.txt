@@ -1,0 +1,2 @@
+On the first day of our DevOps course, we learned about the technologies and 
+tools we would need to learn over the course of a month in order to achieve DevOps.
