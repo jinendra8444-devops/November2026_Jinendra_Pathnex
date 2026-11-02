@@ -1,2 +1,9 @@
 On the first day of our DevOps course, we learned about the technologies and 
 tools we would need to learn over the course of a month in order to achieve DevOps.
+
+3 hours : watched the youtube video
+2 hours : practiced git set up and pushed the code to central repo
+30 mins : watch some english  videos
+10 mins : practices english
+30 mins : Gone through the IP addresses, Public Ip, Private Ip
+30 mins : classes of the IP
