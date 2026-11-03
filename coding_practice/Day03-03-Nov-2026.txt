@@ -1,0 +1,61 @@
+In day03 we learned some linux commands
+
+##########
+If  a file or directory is large then to reduce the size of the file we use "tar" "gzip" "zip" 
+
+creating tar file :
+C : create archive.
+X : Extract files from archive,
+V : verbose 
+F : file
+T : show the live archiving
+U : archive it and add it existing archive
+Z :  zip the file
+
+tar -czvf file-backup.tar.gz app.log : archive the file
+tar -xzvf file-backup.tar.gz
+
+gzip : it  compress the file
+gzip file1
+
+############
+Inode : this is a unique number that helps to identify the file and each file and stores the metadata
+
+ls -i  : show the inode of 
+df -i  : show total number of inodes, used inodes, available inodes
+
+###########
+Links : Links are used to create references to files or directories
+
+soft link : this is used as a shortcut to original file
+If orinal file got delete or renamed or removed link will broke
+
+command:
+ln -s file.txt /demo/new-file.txt
+
+hard link : this links another file name with same inode 
+If orinal file got delete or renamed or removed link will still works
+
+command:
+ln file.txt /demo/new-file.txt
+
+confirm the inode number of both links by running 
+ls -li
+
+#####
+lsof file-name:  to find the process of perticular process
+ps  -ef :  show the process
+kill -9 <pid> : kill the process
+
+######
+grep : filter the data from file
+grep "demo" file1
+
+
+
+
+
+
+
+
+
