@@ -1,0 +1,72 @@
+#########
+Process :
+ps -ef   :  show all the process 
+
+Zombie process :
+child  process that has completed execution, but its entry still exists in the process 
+table because its parent process has not yet collected its exit status.
+
+ps aux | grep defunct
+
+Orphan process: 
+The process whose parent has terminated while child process is running
+
+#####
+Realtive path :
+cd  /root/var/logs/myapp/data   :  start from root top most path
+cd  ../../../tmp/exam/demo      : start from any where
+
+#####
+curl : used to check the connective and used for API calls
+wget : used to download the data from internet
+
+#####
+grep : used to fetch or filter the data from source
+
+grep "pattern" file1.txt : search pattern from file
+grep  -i  "pattern" file1.txt :  ignore the case sentive
+grep  -w  "pattern"  file.txt   :   this will print the exact pattern only. 
+grep -c "pattern" file1.txt :  provide only total number of time it occures
+
+egrep : used for filter multiple data
+egrep  -in "unil|root|no"  /etc/passwd     :    fetch all the provided patterns
+
+#####
+cut : this is used for fetch the data or filter the data in advance way
+
+cut -c1 /etc/passwd    :  fetch the 1st character
+cut -d ":" -f3 /etc/passwd  :  fetch the 3rd column character 
+
+#####
+sed :
+sed -i "s/olddata/newdata/g" file   :  this will change the data in vi editor mode
+
+#####
+Run level : This helps to manage the OS state
+0 - halt/shutdown 
+1 - single user
+3 - multi user mode
+5 - GUI mode
+6 - reboot
+
+Example :  init 0,  init 6
+
+
+#####
+network commands
+netstat -putan | grep <ip/port>  :  check the perticular port is listening or not
+ifconfig   :  show the ip
+uname  -a  :  show the system and kernal details
+uptime    :  show the system uptime details and load
+
+systemctl start servicename : start the service
+systemctl enable servicename : enable the service
+
+
+
+
+
+
+
+
+
