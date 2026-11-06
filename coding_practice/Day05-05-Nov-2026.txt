@@ -1,0 +1,122 @@
+########
+Git :
+	Git is a open source distributed version control system which will help us store the code, 
+	and history on Local working platform
+
+GitHub :
+  GitHub is a popular web based platform/service that store the git repository
+
+Setting user name for Git
+	git config --global user.name “Jinendra”
+	git config --global user.email  “jinendra@gmail.com”
+	git config --global --list  
+
+clone : when you joined to existing project and copy the existing project from github
+  git clone <github url>
+
+
+There are 3 stages in the git
+A.Working directory :  It is Local work area. where you make changes to the code.
+		           git add  .   it is move all file working area to staging area
+B.Staging area :  used to store the snapshots before commit the changes
+C.Local repository  :  where all the changes are saved after committing. 
+
+When you add or make any chenge to repo you have to add
+git add .
+This move the code to staging are
+
+git commit -m "message"
+This save the code locally
+
+If you make any changes then when you run git status it will show as what the changes have made
+	git status  : it will show the un-tracked [newly added] files and modified files
+	git add . 
+	git commit -m  "first commit"  
+	git log     :   show the project history  and at the top you have recent commits
+	git log  - -oneline    :  provide single line commit summary
+
+
+
+#####
+Branch : this will create the isolated environment for modifying the code. No need to touch main code/branch
+
+git branch feature : create feature branch
+git checkout feature : this switch branch
+
+Update your code 
+Not add, commit, push to central repository in a branch you have created
+
+To push the code to central repo:
+git push origin feature
+
+Now Raise PR with adding respected reviewer :
+Review the code and merge it to main branch
+
+
+######
+Fetch vs Pull 
+Fetch  : Used to download the changes from remote repository but will not do integration or merge to local workflow.
+Pull : first it will download the changes from remote and integrate changes with local
+
+Standerd workflow is :
+1.First you have to pull before working
+2.Then work on the task/feature
+3.Then push to feature branch of GitHub repo
+4.Now reviewer will review the code and merge it to main
+
+
+######
+
+Git Ignore :
+	These are ignored by git and  It will not tracked by the git 
+	We can to add what the files, directories have to be ignored  :  .gitignore 
+
+Git merge :
+	Combining the changes from one branch to another branch
+  It will create new commit and history of feature branch is preserve
+
+Git Rebase :
+	It provide the clean and linear history
+
+
+#####
+Git revert :
+	It will create new commit that Undo the previous commits and add the new commit 
+	It will undo the commits that have been pushed to shared branch
+	
+	git revert commit-id
+	
+Git reset :
+	Deleting the commits along with actions. 
+	git reset --hard HEAD~N 
+
+
+#######
+Git stash :
+	It is used to when you are working on a branch and you want to switch to other branch start working on that
+	With saving the last branch updates we use stash.
+
+  git stash save "work on new heade"
+  git stash list
+  git stash save
+  git stash pop 
+
+
+######
+The states of Git :
+
+Untracked file : modified the files or code in the repository
+Changes to be committed : changes which are added using git add  
+git rm --cached <filename>  : file has added, to un-stage and move to untracked 
+Changes not staged for commit : after adding the file again modified
+
+How to push the code to GitHub central repository using SSH:
+In local machine generate SSH-Key and add that key to Github account now we can push the code .
+Usecase is each time no need to add username and password
+
+
+
+
+
+
+
