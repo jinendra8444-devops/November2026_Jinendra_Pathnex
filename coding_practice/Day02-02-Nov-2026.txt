@@ -1,0 +1,83 @@
+#######
+In day 2 we learned about Linux operating system and the overview of the Linux like 
+usecases and some basic commands of linux 
+
+commands goes like :
+1. ls : list the files and directories
+2. ls -a : list of all files including hidden
+3. ls -l :	Lists files in long format
+4. ls -ltr : sorts file and dir in order by modification time 
+
+pwd : present working directory
+
+mkdir : creating directory
+
+touch : creating files
+
+vi : It is a editor and Insert data into file
+
+cd : changing the directory
+
+chmod : changing the permission of the file or directory
+
+#########
+file permissions:
+Read(4), Write(2), Execute(1)
+
+There are 3 groups in a file we have
+user, groups, other
+
+all have like read, write, execute permission seperatly
+
+By default we have 644 permissions
+rw_ : user
+r__ : group
+r__ : other
+
+we can change the permission using "chmod" command
+
+chmod 777 file1 : this will give full permission 
+chmod 444 file1 : this will give read permission
+chmod 622 file1 : this will give RW permission for user and W permission for group and other
+
+Like this we can set the permission of a file according to requirements
+
+#######
+Head and Tail 
+
+Head : this is used to fetch the top or first lines of the given file
+head -30 file1  :  fetch first 30 line of file
+
+Tail : this is used to fetch the recent lines of the given file
+tail -30 file   :  fetch the last 30 lines
+
+Note : by default it will fecth 10 line : head file1
+
+mv : move the file or directory
+
+mv : also used for renaming
+
+######
+usmak : It used to set the default permission to file or directory
+By default umask is : 022 
+
+Also we can set user defined umask
+umask 444
+
+less : used to view large file page by page
+
+`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
