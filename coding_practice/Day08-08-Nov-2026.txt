@@ -1,0 +1,93 @@
+#####
+Kubernetes :
+
+EKS is a managed Kubernetes service provided by AWS. It allows us to deploy, manage, and 
+scale containerized applications using Kubernetes without manually managing the Kubernetes control plane.
+
+Components
+- Control plane: AWS manages Kubernetes API server, scheduler, etcd, and control plane availability.
+- Worker nodes:  Kubelet, kube proxy, pod, CRIo
+
+1. API Server
+The API Server is the main entry point to the Kubernetes cluster
+
+2. Scheduler (kube-scheduler)
+The scheduler decides which worker node should run a newly created pod.
+
+3. etcd
+etcd is a distributed key-value database used by Kubernetes to store cluster state
+
+4. Controller Manager
+The Controller Manager runs controllers that continuously compare the actual state with the desired state.
+
+Worker Node :
+1. kubelet
+Kubelet is an agent running on each worker node.
+
+2. kube-proxy
+kube-proxy manages network rules
+
+3. Container Runtime
+The container runtime is responsible for running containers.
+
+4. Pods
+A Pod is the smallest deployable unit in Kubernetes.
+
+#######
+Autoscaling
+
+Autoscaling
+Autoscaling automatically increases or decreases infrastructure capacity based on demand.
+
+Amazon CloudWatch
+CloudWatch is an AWS monitoring and observability service.
+We use it to monitor the health and performance of AWS resources and applications.
+
+
+Amazon SNS (Simple Notification Service)
+SNS is a messaging and notification service.
+
+AWS Lambda and Triggers
+It executes code without us managing servers. We upload our code, configure the trigger, and AWS executes it when the event occurs.
+
+
+What is a trigger?
+A trigger is an event that causes Lambda to execute.
+
+AWS WAF (Web Application Firewall)
+AWS WAF protects web applications from malicious HTTP/HTTPS requests.
+What can WAF protect against?
+- SQL injection
+- Cross-site scripting (XSS)
+- Malicious IP addresses
+- Excessive requests from certain IPs
+- Suspicious HTTP requests
+- Certain bots
+
+
+AWS Shield
+AWS Shield protects AWS applications against DDoS
+
+
+AWS GuardDuty
+GuardDuty is an intelligent threat detection service that continuously analyzes AWS activity to identify potential security threats.
+
+AWS KMS (Key Management Service)
+KMS is a managed service used to create and manage encryption keys and control their use.
+
+Where is KMS used?
+- S3 bucket encryption
+- EBS volume encryption
+- RDS encryption
+- Secrets Manager encryption
+- EKS-related encryption integrations
+- CloudWatch Logs encryption
+
+AWS SSM (Systems Manager)
+AWS Systems Manager is a service used to manage, operate, automate, and troubleshoot AWS infrastructure.
+
+
+
+
+
+
