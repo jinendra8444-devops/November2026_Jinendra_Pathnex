@@ -1,0 +1,112 @@
+#########
+In day06 we gone through the Cloud concepts
+
+On-prem :
+On-premises means resources are created and manages its own IT infrastructure within its office or data center.
+
+Cloud :
+Resources are created on the cloud platform like AWS, GCP, AZure, and etc
+This can be accessed from any where, Pay as you use
+
+Types of Cloud
+Public Cloud : Cloud infrastructure is managed by public cloud providers like AWS and resources can be accessed by multiple users
+
+Private cloud : Cloud infrastructure is dedicated to single organization, authenticated users only can access it.
+
+
+######
+Landing zone :  it is used to manage and maintain multiple organization account, secured, highavailable, isolated.
+
+AWS Control Tower : Helps to automate the creation of landingzone 
+
+#######
+AWS : amazon web services
+Global services : A service provide global level functionality
+EX: Route 53, IAM etc
+
+Regional services : A service is provide its operations at region level
+EX: ec2, vpc, EKS, RDS
+
+#######
+Cloud Service Models IaaS, PaaS and SaaS
+Iaas : infrastructure as a service 
+Here user will manage OS and application
+
+PaaS : pltform as a service
+Here provider will manage platform
+
+SaaS : Software as a service
+Every this is managed by provider only
+
+########
+AWS servvices :
+Ec2, VPC, IAM, S3, EBS, etc
+
+Ec2 : elastic compute cloud - It is aws service used to create the server over the AWS by using required configuration
+
+VPC: virtual private cloud - Used to create the isolated network over the AWS which is more secured and isolated
+
+VPC concepts:
+CIDR Block
+CIDR stands for Classless Inter-Domain Routing.
+
+It defines the IP address range of your VPC.
+10.0.0.0/24
+
+Subnets
+A subnet is a smaller network created inside a VPC
+
+
+Public Subnet
+ Resources created in public subnet can communicate with the internet.
+
+Private Subnet
+  Resources created in rivate subnet cannot directly communicate with the internet.
+
+Availability Zones
+An Availability Zone (AZ) is an isolated location within an AWS Region.
+
+NAT Gateway
+NAT stands for Network Address Translation.
+
+It allows resources in a private subnet to access the internet without allowing unsolicited inbound internet connections.
+
+Route Table
+A Route Table controls how network traffic travels from a subnet.
+
+Security Group
+A Security Group acts as a virtual firewall for AWS resources such as EC2 instances.
+
+Network ACL (NACL)
+Network ACL is a firewall that operates at the subnet level.
+
+
+VPC Peering
+VPC Peering allows two VPCs to communicate with each other privately using private IP addresses.
+
+Transit Gateway
+AWS Transit Gateway connects multiple VPCs and on-premises networks through a central networking hub.
+
+########
+IAM : 
+AWS IAM Identity and Access Management used to mange the multiple aws accounts by authenticating and authorizing it
+
+IAM Users :
+Idividual identity depending on the defined and attached policy he can perform tasks on AWS
+
+IAM group :
+It is collection of identical users
+Instead of assigning permissions individually, we can assign permissions to a group and add respected users to it
+
+IAM Policies
+An IAM Policy is a JSON document that defines permissions.
+
+IAM roles:
+Temporary identity with permissions that provide temporary access to the resources
+
+
+
+
+
+
+
