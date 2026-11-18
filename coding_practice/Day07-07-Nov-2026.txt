@@ -1,0 +1,157 @@
+#####
+VPC : (Virtual Private Cloud) is a logically isolated virtual network in AWS where we can launch and 
+manage AWS resources such as EC2 instances, RDS databases, and load balancers.
+
+
+Components:
+CIDR Block
+CIDR defines the IP address range allocated to a VPC.
+
+VPC CIDR: 10.0.0.0/16
+
+Subnet
+A subnet is a smaller network created inside a VPC.
+
+Subnets are associated with an Availability Zone
+
+Public Subnet
+  Resources can communicate with the internet through an Internet Gateway.
+
+Private Subnet
+  Resources do not have direct internet access through an Internet Gateway
+
+Internet Gateway (IGW)
+An Internet Gateway allows communication between resources in a VPC and the internet.
+
+Route Table
+A route table determines where network traffic should go.
+
+NAT Gateway
+NAT Gateway allows resources in a private subnet to initiate connections to the internet without 
+allowing unsolicited inbound internet connections.
+
+Security Group (SG)
+Security Group acts as a virtual firewall at the EC2 network interface level.
+
+Network ACL (NACL)
+Network ACL is a firewall that operates at the subnet level.
+
+Elastic Network Interface (ENI)
+ENI is a virtual network interface attached to an EC2 instance.
+
+
+Transit Gateway
+Transit Gateway connects multiple VPCs and on-premises networks through a central networking hub.
+
+
+VPC Flow Logs
+VPC Flow Logs capture information about IP traffic going to and from network interfaces in a VPC
+
+
+########
+S3
+Amazon S3 (Simple Storage Service) is an AWS object storage service used to store and retrieve data such as files, images, videos, backups, logs, and application artifacts.
+
+S3 is highly scalable and provides high durability.
+
+
+Bucket : A bucket is a container in S3 used to store objects.
+
+Object
+An object is the actual data stored inside an S3 bucket.
+
+Key
+A key is the unique identifier of an object within a bucket.
+
+
+Versioning
+Versioning maintains multiple versions of an object in the same bucket.
+When ever the changes are made then object stored as versions
+
+Lifecycle Rules
+Lifecycle rules automatically manage objects based on their age or other conditions.
+
+Storage Classes
+S3 provides different storage classes depending on access frequency and retrieval requirements.
+
+
+
+Bucket Policy
+A bucket policy is a resource-based JSON policy used to control access to an S3 bucket.
+
+
+Encryption
+S3 encryption protects data stored in buckets.
+
+Replication
+Replication automatically copies objects from one bucket to another.
+
+
+Transfer Acceleration
+S3 Transfer Acceleration speeds up uploads and downloads over long geographical distances using AWS edge locations.
+
+Static Website Hosting
+S3 can host static websites containing HTML, CSS, JavaScript, and images.
+
+########
+Session Manager:
+Session Manager, you can access the EC2 instance without keys, port amd other requirements.
+Normally, SSH access requires:
+- Private key (.pem).
+- SSH port 22.
+- Network connectivity to the instance.
+But in ssm you can access the server without above requirements
+
+
+configuration:
+
+Create an IAM role for EC2 and attach this AWS-managed policy
+Attach IAM Role to EC2
+Verify SSM Agent : sudo systemctl status amazon-ssm-agent  
+
+
+#####
+Route 53:
+Amazon Route 53 is a highly available and scalable DNS (Domain Name System) web service provided by AWS.
+
+DNS Record Types
+A DNS record defines how a domain name should resolve to a destination.
+
+types:
+A - 	Maps domain to IPv4 address
+AAAA -	Maps domain to IPv6 addres
+CNAME - 	Maps one domain to another
+NS	- Defines authoritative name servers
+SOA	Contains DNS zone information
+
+
+Routing Policies:
+1. Simple Routing
+2. Weighted Routing
+3. Latency-Based Routing
+4. Failover Routing
+5. Geolocation Routing
+6. Geoproximity Routing
+7. Multivalue Answer Routing
+
+
+
+##########
+AWS CloudTrail :
+It used to monitor and record API activities performed in an AWS account.
+In simple words, CloudTrail tells us who performed an action, what action was performed, 
+when it happened, and from where it was performed.
+
+CloudWatch :
+Amazon CloudWatch is a monitoring and observability service used to monitor 
+AWS resources, applications, logs, and infrastructure performance.
+
+
+
+
+
+
+
+
+
+
