@@ -1,0 +1,164 @@
+#######
+AWS services on 9-nov
+
+AWS KMS (Key Management Service)
+AWS KMS is used to create, manage, and control encryption keys that protect sensitive data.
+
+We use it to encrypt data stored in AWS services such as S3, EBS, RDS, and other supported services.
+Ex: You have an S3 bucket containing backup files. You want to make sure that even if someone gets access to the files, 
+they cannot read the encrypted content without authorization.
+
+
+####
+AWS Systems Manager (SSM)
+AWS Systems Manager is used to manage, automate, troubleshoot, and operate AWS infrastructure.
+
+ex: Session Manager	Connect to EC2 without SSH keys or inbound port 22
+
+######
+Amazon Aurora - SQL Database
+Amazon Aurora is a relational database service compatible with MySQL and PostgreSQL.
+It is part of Amazon RDS and is designed for high availability, performance, and scalability.
+
+#####
+Amazon DynamoDB - NoSQL DB
+DynamoDB is a fully managed NoSQL database.
+it stores data as items with attributes
+
+#####
+Amazon Redshift - Data Warehouse
+Amazon Redshift is a managed data warehouse used for analytics and reporting on large volumes of data.
+Data is collected and loaded into Redshift for analytics.
+
+
+#####
+AWS DMS
+AWS DMS is used to migrate databases from one database environment to another.
+
+It supports many migration scenarios, such as:
+- On-premises database to AWS
+- One AWS database to another
+
+
+#####
+AWS Batch
+AWS Batch is used to run large numbers of batch-processing jobs.
+
+Examples
+- Processing thousands of files
+- Data processing
+
+#####
+EBS and EFS
+
+Both are storage services, but they work differently.
+EBS provides block storage for EC2 instances.
+It is a block storage
+Think of it like a hard disk.
+Note:EBS volumes are generally attached to EC2 instances in the same Availability Zone as the volume.
+
+EFS : Elastic File System
+EFS provides managed shared file storage using the NFS protocol.
+Multiple EC2 instances can access the same shared filesystem concurrently
+It is file storage
+
+######
+AWS Elastic Beanstalk
+Elastic Beanstalk is a managed platform service used to deploy and manage applications 
+without manually managing all the underlying infrastructure.
+
+######
+Amazon CloudFront
+CloudFront is AWS's Content Delivery Network
+It delivers content to users from geographically closer edge locations to reduce latency and improve performance.
+
+####
+AWS Snowball
+AWS Snowball is part of AWS's physical data transfer and edge computing appliance family.
+Example
+Your company has 100 TB of data stored in an on-premises data center.
+
+Uploading it over the internet may take a long time. so snowball make it easy to transfer data
+
+#####
+AWS CodePipeline
+
+CodePipeline is a CI/CD orchestration service.
+It automates the stages involved in releasing an application
+
+#####
+AWS CodeBuild
+CodeBuild is a managed build service.
+
+It compiles source code, runs tests, executes scripts, builds Docker images, and generates build artifacts.
+
+
+#####
+AWS CodeDeploy
+CodeDeploy automates application deployments to supported compute targets, including EC2/on-premises instances, Lambda, and ECS.
+
+Deployment strategies
+Rolling deployment
+The existing application instances are updated with the new version
+
+Blue-Green deployment
+We maintain two environments:
+- Blue - Current production
+- Green - New version
+
+Canary deployment
+In a canary deployment, we release the new version to a small percentage of traffic first.
+
+If everything looks good, we gradually increase traffic.
+
+######
+AWS X-Ray
+AWS X-Ray is used for distributed tracing.
+
+When an application contains multiple microservices, it helps us understand where a request is 
+spending time and where failures are occurring.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

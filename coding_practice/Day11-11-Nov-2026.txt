@@ -1,0 +1,61 @@
+####
+kubernetes:
+Kubernetes (K8s) is an open-source container orchestration platform used to deploy, 
+manage, scale, and maintain containerized applications.
+
+Why kubernetes :
+Hundreds of containers Managing all these containers manually becomes difficult.
+Kubernetes automates this management
+
+Use cases of Kubernetes
+1. Container orchestration
+Kubernetes manages containers running across multiple servers.
+
+2.Auto-healing
+If a container or pod crashes, Kubernetes can recreate it to maintain the desired state
+
+3. Scaling
+Kubernetes can increase or decrease the number of pods based on demand.
+
+4.Rolling updates
+We can update an application version without bringing the entire application down.
+
+5.Rollback
+If a deployment fails, we can roll back to a previous stable version.
+
+###
+Kubernetes Architecture - All Components
+A Kubernetes cluster has two major parts:
+1. Control Plane - manages and controls the cluster.
+2. Worker Nodes - run the application workloads
+
+1. kube-apiserver
+The API Server is the main entry point for Kubernetes.
+
+2. etcd
+etcd is a distributed key-value store used to store Kubernetes cluster state
+
+3. kube-scheduler
+The Scheduler decides which worker node should run a newly created Pod.
+
+4. kube-controller-manager
+Controller Manager runs controllers that continuously compare actual state with desired state.
+
+Worker node -
+1. kubelet
+Kubelet is an agent running on every worker node.
+
+2. Container Runtime
+Container Runtime runs the containers.
+
+3. kube-proxy
+kube-proxy implements Service networking rules on nodes
+
+4. Pod
+A Pod is the smallest deployable unit in Kubernetes.
+
+###########
+
+Kubernetes Flow
+user -> API Server  -> etcd -> Deployment Controller  -> Scheduler -> kubelet -> Container Runtime
+
