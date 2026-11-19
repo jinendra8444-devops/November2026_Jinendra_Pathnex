@@ -1,0 +1,320 @@
+######
+Terraform code to create EC2 Instance
+
+provider.tf
+terraform {
+  required_version = ">= 1.6.0"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = var.aws_region
+}
+
+
+variables.tf
+variable "aws_region" {
+  description = "AWS deployment region"
+  type        = string
+  default     = "ap-south-1"
+}
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default     = "t3.medium"
+}
+
+variable "ami_id" {
+  description = "Amazon Linux 2023 AMI ID"
+  type        = string
+}
+
+variable "subnet_id" {
+  description = "Private subnet ID"
+  type        = string
+}
+
+variable "vpc_id" {
+  description = "Existing VPC ID"
+  type        = string
+}
+
+variable "allowed_ssh_cidr" {
+  description = "Trusted IP address allowed for SSH"
+  type        = string
+
+  validation {
+    condition     = can(cidrhost(var.allowed_ssh_cidr, 0))
+    error_message = "Provide a valid CIDR block."
+  }
+}
+
+####
+main.tf
+# Security Group
+
+resource "aws_security_group" "ec2_sg" {
+
+  name        = "production-ec2-sg"
+  description = "Security group for production EC2"
+  vpc_id      = var.vpc_id
+
+  # SSH restricted to trusted IP
+
+  ingress {
+    description = "SSH access"
+
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+
+    cidr_blocks = [var.allowed_ssh_cidr]
+  }
+
+  # Application traffic example
+
+  ingress {
+    description = "HTTPS traffic"
+
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+
+    cidr_blocks = ["10.0.0.0/8"]
+  }
+
+  # Outbound traffic
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name        = "production-ec2-sg"
+    Environment = "production"
+  }
+}
+
+
+# EC2 Instance
+
+resource "aws_instance" "production_ec2" {
+
+  ami           = var.ami_id
+  instance_type = var.instance_type
+
+  subnet_id = var.subnet_id
+
+  vpc_security_group_ids = [
+    aws_security_group.ec2_sg.id
+  ]
+
+  iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
+
+  # Disable public IP
+
+  associate_public_ip_address = false
+
+  # Enforce IMDSv2
+
+  metadata_options {
+    http_endpoint               = "enabled"
+    http_tokens                 = "required"
+    http_put_response_hop_limit = 1
+  }
+
+  # Encrypted EBS volume
+
+  root_block_device {
+
+    volume_size = 30
+    volume_type = "gp3"
+
+    encrypted = true
+
+    delete_on_termination = false
+
+    tags = {
+      Name        = "production-root-volume"
+      Environment = "production"
+    }
+  }
+
+  # Detailed monitoring
+
+  monitoring = true
+
+  # Prevent accidental termination through Terraform
+
+  disable_api_termination = true
+
+  # Instance tags
+
+  tags = {
+
+    Name        = "production-ec2"
+    Environment = "production"
+    Project     = "terraform-infrastructure"
+    ManagedBy   = "terraform"
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+
+output "instance_id" {
+
+  description = "EC2 Instance ID"
+
+  value = aws_instance.production_ec2.id
+}
+
+
+#####
+terraform.tfvars
+aws_region = "ap-south-1"
+
+instance_type = "t3.medium"
+
+ami_id = "ami-xxxxxxxxxxxxxxxxx"
+
+vpc_id = "vpc-xxxxxxxx"
+
+subnet_id = "subnet-xxxxxxxx"
+
+allowed_ssh_cidr = "YOUR_PUBLIC_IP/32"
+
+
+
+#####
+Execution commands
+# Step 1: Initialize Terraform
+terraform init
+
+# Step 2: Validate configuration
+terraform validate
+
+# Step 3: Format configuration
+terraform fmt -recursive
+
+# Step 4: Check execution plan
+terraform plan
+
+# Step 5: Create infrastructure
+terraform apply
+
+
+######
+Remote backend connection to store statefile
+terraform {
+  backend "s3" {
+    bucket       = "my-production-terraform-state"
+    key          = "ec2/production/terraform.tfstate"
+    region       = "ap-south-1"
+    encrypt      = true
+    use_lockfile = true
+  }
+}
+
+
+#####
+1. Terraform State File
+A Terraform state file is a file that maintains information about the infrastructure resources created and managed by Terraform.
+
+File is called as by dafault : terraform.tfstate
+
+Without the state file, Terraform cannot reliably know which real AWS resources correspond to the resources declared in your configuration.
+
+
+
+2. State File Management
+State file management means maintaining, protecting, and controlling the Terraform state file throughout the infrastructure lifecycle.
+
+A. Local state management
+By default, Terraform stores the state locally.
+Issue is when we working in a team This can result in inconsistent state
+
+B. Remote state management
+Instead of storing the state file locally, store it in a centralized remote backend such as Amazon S3.
+
+Use cases:
+Centralized storage, team collaboration, Security, Backup, Statelocking
+
+
+3. What is State Locking?
+State locking is a mechanism that prevents multiple Terraform operations from modifying the same state file simultaneously.
+
+4. How to forcefully remove a state lock?
+Terraform provides a command:
+terraform force-unlock LOCK_ID
+
+LockID is a unique identifier generated when Terraform acquires a state lock.
+
+Terraform provides a flag to bypass state locking.
+terraform apply -lock=false
+
+
+5. DynamoDB locking vs S3 native locking
+Previously, Terraform commonly used DynamoDB for state locking when storing state in S3.
+
+Now, Terraform supports native S3 state locking using:
+use_lockfile = true
+
+Old approch
+terraform {
+  backend "s3" {
+    bucket         = "my-terraform-state"
+    key            = "production/terraform.tfstate"
+    region         = "ap-south-1"
+    dynamodb_table = "terraform-lock-table"
+    encrypt        = true
+  }
+}
+
+
+6. Terraform state show command
+terraform state list	- Lists resources in state
+terraform state show RESOURCE	- Shows a particular resource
+terraform state pull -	Displays the current state in JSON
+terraform state mv -	Moves a resource address in state
+terraform state rm -	Removes a resource from state without destroying it
+terraform state replace-provider -	Replaces provider references in state
+
+7. What is a Terraform Module?
+A Terraform module is a collection of Terraform configuration files grouped together to create and manage reusable infrastructure.
+
+
+8. Terraform Lifecycle
+The Terraform lifecycle meta-argument helps control how Terraform creates, updates, replaces and destroys resources.
+Ex : resource "aws_instance" "example" {
+
+  ami           = "ami-xxxxxxxx"
+  instance_type = "t3.medium"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+Terraform provides three commonly used lifecycle rules:
+1. create_before_destroy - Avoid downtime
+2. prevent_destroy - Prevents accidental delete
+3. ignore_changes - Ignore drifts
+
+
+
+
+
