@@ -1,0 +1,4 @@
+Did pracice on lifecycle, modules, statefile management etc 3 hours
+Revised concepts of terraform
+English speaking practice
+Gone through AWS services`
